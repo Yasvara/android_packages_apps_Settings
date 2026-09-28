@@ -80,3 +80,7 @@
 
 # Keep the device state AppFunction schema
 -keep class com.google.android.appfunctions.schema.common.v1.devicestate.** { *; }
+
+# The AppFunctions SDK is compile-only; its schema classes reference it but it
+# is provided at runtime. Needed once R8 optimization is enabled.
+-dontwarn com.google.android.appfunctions.**
