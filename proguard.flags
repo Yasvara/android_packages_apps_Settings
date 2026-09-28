@@ -84,3 +84,11 @@
 # The AppFunctions SDK is compile-only; its schema classes reference it but it
 # is provided at runtime. Needed once R8 optimization is enabled.
 -dontwarn com.google.android.appfunctions.**
+
+# Settings builds ComponentNames from these classes (for example in
+# SettingsActivity#doUpdateTilesList). Some only back an <activity-alias>, so
+# aapt2 emits no keep rule and R8 would merge them into another activity,
+# changing the class name. Keep every one of them intact.
+-keep class com.android.settings.Settings$* extends com.android.settings.SettingsActivity {
+    <init>();
+}
